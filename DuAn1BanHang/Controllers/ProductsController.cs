@@ -25,7 +25,12 @@ namespace DuAn1BanHang.Controllers
             var duAn1BanHangContext = _context.Product.Include(p => p.category);
             return View(await duAn1BanHangContext.ToListAsync());
         }
-
+        [HttpPost]
+        public async Task<IActionResult> Index(int catid, string keywords)
+        {
+            var duAn1BanHangContext = _context.Product.Include(p => p.category).Where(p => p.Name.Contains(keywords) && p.CategoryId == catid);
+            return View(await duAn1BanHangContext.ToListAsync()); // debug coi no tro toi kh
+        }
         // GET: Products/Details/5
         public async Task<IActionResult> Details(int? id)
         {

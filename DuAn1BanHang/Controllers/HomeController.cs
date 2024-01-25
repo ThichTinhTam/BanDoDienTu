@@ -1,6 +1,7 @@
 ﻿using DuAn1BanHang.Data;
 using DuAn1BanHang.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
 
 namespace DuAn1BanHang.Controllers
@@ -16,7 +17,7 @@ namespace DuAn1BanHang.Controllers
 
 		public IActionResult Index()
         {
-            return View(_context.Product.ToList());
+            return View(_context.Product?.Include(p => p.category).ToList());
         }
 
         public IActionResult Privacy()
